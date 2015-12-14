@@ -11,7 +11,7 @@ if mode
     I=E.*conj(E);
     H=I.*(mod(phase+m*plane+pi, 2*pi)-pi);
 else
-    H=(mod(phase+m*plane+pi, 2*pi)-pi);
+    H=mod(phase+m*plane+pi, 2*pi)-pi;
 end
 a=min(H(:)); b=max(H(:));
 H=uint8(255*(H-a)/(b-a));

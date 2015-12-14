@@ -1,9 +1,9 @@
-function [] = modalDecomp(Nx, Ny, p, l1, l2, w)
+function [] = modalDecomp(Nx, Ny, p1, l1, p2, l2, w)
 x=linspace(-Nx/Ny,Nx/Ny,Nx);
 y=linspace(-1,1,Ny);
 [xx, yy]=meshgrid(x, y);
-E1=LGBeam(xx,yy,p,l1,w);
-E2=LGBeam(xx,yy,p,l2,w);
+E1=HGBeam(p1,l1,w,xx,yy);
+E2=LGBeam(p2,l2,w,xx,yy);
 E=E1.*conj(E2); 
 E_hat=fftshift(fft2(E));
 figure(1); colormap(gray(256));

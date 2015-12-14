@@ -11,7 +11,7 @@ try
     h=imshow(img.Data','Border','tight','InitialMagnification','fit');
 
     % Set region of interest
-    roi=imrect();
+    roi=imellipse();
     thorcamStartLive(cam);
     
     

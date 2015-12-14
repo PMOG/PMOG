@@ -20,8 +20,8 @@ y=linspace(-range(2), range(2), points(2));
 A(points(1), grid(1), points(2), grid(2))=uint8(0);
 for i=1:grid(1)
     for j=1:grid(2)
-        E=LGBeam(p(i,j), l(i,j), w(i,j), xx, yy);
-        A(:,i,:,j)=planeWave(E, xx, yy, m, theta, 1);
+        E=HGBeam(p(i,j), l(i,j), w(i,j), xx, yy);
+        A(:,i,:,j)=planeWave(E, xx, yy, m, theta, 0);
     end
 end
 A=reshape(A, N);
