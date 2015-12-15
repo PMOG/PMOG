@@ -1,2 +1,2 @@
 # PMOG
-Photonics and Mathematical Optics Group ITESM
+Photonics and Mathematical Optics Group, ITESM
