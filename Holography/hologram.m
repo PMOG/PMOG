@@ -2,8 +2,9 @@ function [] = hologram(N, k, theta, p, l, w)
 % Generates Gaussian beam hologram
 % N(1), N(2) : number of pixels along each dimension
 % m : number of grids
-% k : grid orientation
-% p : radial Order
+% k : grating
+% theta : grid orientation
+% p : radial order
 % l : topological charge
 % w : radius
 grid=size(l);
