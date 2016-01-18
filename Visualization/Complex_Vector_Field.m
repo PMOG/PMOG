@@ -1,5 +1,6 @@
 % Codigo
 clear all
+clc
 % Parametros
 parametros()
 
@@ -7,73 +8,55 @@ parametros()
 global th r
 
 
-%% Prueb
-% Theta =  - pi/4; 
+
+%% Prueba Elipse
+
+% Theta = pi/4;
 % 
-% Eox = 3;
-% Eoy = 1;
+% Eox = cos(Theta);
+% Eoy = sin(Theta);
 % Ex = Eox.*ones(N,N);
-% Ey = Eoy.*exp(-1i.*1.5).*ones(N,N);
-% thetao = Theta.*ones(N,N);
-% 
-% E1 = sqrt(Ex.*conj(Ex)+ Ey.*conj(Ey)); 
+% Ey = -Eoy.*exp(-1i*pi/2).*ones(N,N);
 % 
 % 
+% E = sqrt(Ex.*conj(Ex)+ Ey.*conj(Ey)); 
 % 
-% E = (Ex.*conj(Ex)+ Ey.*conj(Ey)); 
+% Ex = Ex./E;
+% Ey = Ey./E;
 % 
-% disp(max(abs(Ex(:))))
-% disp(max(abs(Ey(:))))
-% disp(max(E(:)))
+% 
+% display(max(abs(Ex(:))))
+% display(max(abs(Ey(:))))
+% display(max(E(:)))
 
-%% Prueba 0
-k = 0.4;
-l1 = 1;
-l2 = 1;
-tho = pi/2;
-sigma1 = 1;
-sigma2 = -1;
 
-J1 = besselj(l1,k.*r);
-J2 = besselj(l2,k.*r);
-
-Phase1 = exp(-2*1i.*((l1+sigma1).*th + l1.*tho));
-Phase2 = exp(-2*1i.*((l2+sigma2).*th + l2.*tho + pi/2));
-
-f = (1 + Phase1).*cos(th) - sigma1.*exp(1i*pi/2).*(1 + Phase2).*sin(th);
-g = (1 + Phase1).*sin(th) + sigma2.*exp(1i*pi/2).*(1+Phase2).*cos(th);
-
-Ex = J1.*f;
-Ey = J2.*g;
-
-E = (Ex.*conj(Ex)+ Ey.*conj(Ey)); 
-
-Ex = J1.*f./max(E(:));
-Ey = J2.*g./max(E(:));
-
-%% Prueba 1
-% k = 0.2;
+%% Prueba 1 (Radial, Azimuthal and Espiral)
+% k = 0.3;
 % l = 1;
 % sigma = -1;
-% theta0 = pi/2;
+% phi0 = pi/4;
 % 
 % Bessel = besselj(l,k.*r);
 % 
-% g1 = cos((l+sigma).*th+l*theta0);
-% g2 = -sigma.*sin((l+sigma).*th+l*theta0);
+% g1 = cos((l+sigma).*th+l*phi0);
+% g2 = -sigma.*sin((l+sigma).*th+l*phi0);
 % Ex = Bessel.*(g1.*cos(th)-g2.*sin(th));
 % Ey = Bessel.*(g1.*sin(th)+g2.*cos(th));
 % 
 % E = sqrt(Ex.*conj(Ex)+ Ey.*conj(Ey));
+% 
+% Ex = Ex./E;
+% Ey = Ey./E;
 
-%% Prueba 2
+
+%% Prueba Bessel - Poincare
 % k = 0.2;
 % 
 % l0 = 0;
 % l1 = 1;
-% sigma0 = -1;
-% sigma1 = 1;
-% theta0 = 0;
+% sigma0 = 1;
+% sigma1 = -1;
+% 
 % 
 % Bessel0 = besselj(l0,k.*r);
 % Bessel1 = besselj(l1,k.*r);
@@ -81,45 +64,70 @@ Ey = J2.*g./max(E(:));
 % Ex = Bessel0.*exp(1i*th).*(cos(th) - 1i*sin(th)) + Bessel1.*(cos(th) + 1i*sin(th));
 % Ey = Bessel0.*exp(1i*th).*(sin(th)+ 1i*cos(th)) + Bessel1.*(sin(th)-1i*cos(th));
 % 
-% E = (Ex.*conj(Ex)+ Ey.*conj(Ey));
+% E = sqrt(Ex.*conj(Ex)+ Ey.*conj(Ey));
 % 
-% Ex = Bessel0.*exp(1i*th).*(cos(th) - 1i*sin(th)) + Bessel1.*(cos(th) + 1i*sin(th))./max(E(:));
-% Ey = Bessel0.*exp(1i*th).*(sin(th)+ 1i*cos(th)) + Bessel1.*(sin(th)-1i*cos(th))./max(E(:));
+% Ex = Ex./E;
+% Ey = Ey./E;
 
-% figure(1)
-% imagesc(abs(Ex.*Ex))
-% axis equal
-% figure(2)
-% imagesc(abs(Ey.*Ey))
-% axis equal
-% figure(3)
-% imagesc(E)
-% axis equal
-%% Parametros
+%% Prueba Modifyd Besell Poincare
 
-% Fase Relativa
-Imaginario = imag(Ex.*conj(Ey));
-Real = real(Ex.*conj(Ey));
-Beta = atan(Imaginario./Real);
 
-% Semi-axis
-thetao = abs(Ey);
-Factor1 = sqrt(1-(sin(2*thetao)).^2.*(sin(2*Beta)).^2);
 
-ao = sqrt(E).*sqrt((1+Factor1)/2);
-bo = sqrt(E).*sqrt((1-Factor1)/2);
+
+
+%% Parametros Stokes y Elipse de Polarizacion
+
+% https://en.wikipedia.org/wiki/Stokes_parameters
+% http://spie.org/publications/optipedia-pages/press-content/fg05/fg05_p12-14_stokes_polarization_parameters
+% https://en.wikipedia.org/wiki/Elliptical_polarization#Polarization_ellipse
+
+
+I = Ex.*conj(Ex) + Ey.*conj(Ey);
+Q = Ex.*conj(Ex) - Ey.*conj(Ey);
+% U = Ex.*conj(Ey) + Ey.*conj(Ex);
+% V1 = 1i*(Ex.*conj(Ey) - Ey.*conj(Ex));
+U = 2*real(Ex.*conj(Ey));
+V = -2*imag(Ex.*conj(Ey));
+% I = abs(Q).^2 + abs(U).^2 + abs(V).^2;
+
+La = Q + 1i*U;
+absLa = sqrt(abs(Q).^2 + abs(U).^2);
+
+
+% Elipse
+ao = (1/2)*(I + absLa); % Semieje mayor
+bo = (1/2)*(I - absLa); % Semieje menor
+%thetao = (1/2)*atan(U./Q); % Angulo con respecto a eje x
+thetao = (1/2).*angle(La);
+h = sign(V); % Signo de orientacion de elipse (+ Left-Hand = Blue. - Right-Had + Red)
+
+
+% % Fase Relativa
+% Imaginario = imag(Ex.*conj(Ey));
+% Real = real(Ex.*conj(Ey));
+% Beta = atan(Imaginario./Real)/2;
+% 
+% % Semi-axis
+% % thetao = abs(Ey);
+% Factor1 = sqrt(1-(sin(2*thetao)).^2.*(sin(2*Beta)).^2);
+% 
+% ao = sqrt(E).*sqrt((1+Factor1)/2);
+% bo = sqrt(E).*sqrt((1-Factor1)/2);
+
+
+
 
 %% Sampling
-Sampling = 8;
+Sampling = 64;
 Spacing1 = 1:floor(N/Sampling):N;
 a1 = ao(Spacing1,Spacing1);
 b1 = bo(Spacing1,Spacing1);
-ref = 0;
+ref = -pi/2; %For having agreement with polarization ellipse
 theta1 = thetao(Spacing1,Spacing1)+ref ; 
 
 % Plot ellipse
 divs=size(a1);
-big=[512, 1024];
+big=[1024, 1024];
 small=big./divs;
 pts=2*(small(1)+small(2));
 L=max(abs([a1(:); b1(:)]));
@@ -135,10 +143,12 @@ end
 A=reshape(A, big);
 figure(1);
 imshow(A,'Border','tight','InitialMagnification','fit');
-colormap(gray(256));
+colormap(flipud(gray(256)));
 axis equal
-        
-%% Parametros Elipse        
+
+imwrite(A, 'oh yea.jpg');
+      
+%% Plot      
 figure(7)
 
 subplot(2,2,1)
@@ -178,3 +188,27 @@ imagesc(E)
 title( ' E ') 
 axis equal
 colormap(hot)
+
+
+
+% display(max(I(:)))
+% display(max(Q(:)))
+% display(max(U(:)))
+% display(max(V(:)))
+% display(max(h(:)))
+% display(max(thetao(:)))
+
+% figure(8)
+% subplot(2,2,3)
+% imagesc(U)
+% title( ' U ') 
+% subplot(2,2,4)
+% imagesc(V)
+% title( ' V ') 
+% subplot(2,2,2)
+% imagesc(Q)
+% title( ' Q ') 
+% subplot(2,2,1)
+% imagesc(I)
+% title( ' I ') 
+

@@ -67,8 +67,8 @@ end
 
         % Número de puntos en la ventana transversal.
         N = 512;
-        Nx = 512;
-        Ny = 512;
+        Nx = N;
+        Ny = N;
         
         Lx =5*Wo;
         Ly = 5*Wo;
