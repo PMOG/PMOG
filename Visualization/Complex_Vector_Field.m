@@ -1,3 +1,5 @@
+
+
 % Codigo
 clear all
 clc
@@ -16,7 +18,7 @@ global th r
 % Eox = cos(Theta);
 % Eoy = sin(Theta);
 % Ex = Eox.*ones(N,N);
-% Ey = -Eoy.*exp(-1i*pi/2).*ones(N,N);
+% Ey = -Eoy.*exp (-1i*pi/2).*ones(N,N);
 % 
 % 
 % E = sqrt(Ex.*conj(Ex)+ Ey.*conj(Ey)); 
@@ -50,24 +52,24 @@ global th r
 
 
 %% Prueba Bessel - Poincare
-% k = 0.2;
-% 
-% l0 = 0;
-% l1 = 1;
-% sigma0 = 1;
-% sigma1 = -1;
-% 
-% 
-% Bessel0 = besselj(l0,k.*r);
-% Bessel1 = besselj(l1,k.*r);
-% 
-% Ex = Bessel0.*exp(1i*th).*(cos(th) - 1i*sin(th)) + Bessel1.*(cos(th) + 1i*sin(th));
-% Ey = Bessel0.*exp(1i*th).*(sin(th)+ 1i*cos(th)) + Bessel1.*(sin(th)-1i*cos(th));
-% 
-% E = sqrt(Ex.*conj(Ex)+ Ey.*conj(Ey));
-% 
-% Ex = Ex./E;
-% Ey = Ey./E;
+k = 0.2;
+
+l0 = 0;
+l1 = 1;
+sigma0 = 1;
+sigma1 = -1;
+
+
+Bessel0 = besselj(l0,k.*r);
+Bessel1 = besselj(l1,k.*r);
+
+Ex = Bessel0.*exp (1i*th).*(cos(th) - 1i*sin(th)) + Bessel1.*(cos(th) + 1i*sin(th));
+Ey = Bessel0.*exp (1i*th).*(sin(th)+ 1i*cos(th)) + Bessel1.*(sin(th)-1i*cos(th));
+
+E = sqrt(Ex.*conj(Ex)+ Ey.*conj(Ey));
+
+Ex = Ex./E;
+Ey = Ey./E;
 
 %% Prueba Modifyd Besell Poincare
 
@@ -78,8 +80,8 @@ global th r
 %% Parametros Stokes y Elipse de Polarizacion
 
 % https://en.wikipedia.org/wiki/Stokes_parameters
-% http://spie.org/publications/optipedia-pages/press-content/fg05/fg05_p12-14_stokes_polarization_parameters
-% https://en.wikipedia.org/wiki/Elliptical_polarization#Polarization_ellipse
+% http://spie.org/publications/optipedia-pages/press-content/fg05/fg05_p12-14_stokes _polarization _parameters
+% https://en.wikipedia.org/wiki/Elliptical_polarization#Polarization _ellipse
 
 
 I = Ex.*conj(Ex) + Ey.*conj(Ey);
@@ -88,16 +90,16 @@ Q = Ex.*conj(Ex) - Ey.*conj(Ey);
 % V1 = 1i*(Ex.*conj(Ey) - Ey.*conj(Ex));
 U = 2*real(Ex.*conj(Ey));
 V = -2*imag(Ex.*conj(Ey));
-% I = abs(Q).^2 + abs(U).^2 + abs(V).^2;
+% I = abs (Q).^2 + abs (U).^2 + abs (V).^2;
 
 La = Q + 1i*U;
-absLa = sqrt(abs(Q).^2 + abs(U).^2);
+absLa = sqrt(abs (Q).^2 + abs (U).^2);
 
 
 % Elipse
 ao = (1/2)*(I + absLa); % Semieje mayor
 bo = (1/2)*(I - absLa); % Semieje menor
-%thetao = (1/2)*atan(U./Q); % Angulo con respecto a eje x
+% thetao = (1/2)*atan(U./Q); % Angulo con respecto a eje x
 thetao = (1/2).*angle(La);
 h = sign(V); % Signo de orientacion de elipse (+ Left-Hand = Blue. - Right-Had + Red)
 
@@ -105,24 +107,24 @@ h = sign(V); % Signo de orientacion de elipse (+ Left-Hand = Blue. - Right-Had +
 % % Fase Relativa
 % Imaginario = imag(Ex.*conj(Ey));
 % Real = real(Ex.*conj(Ey));
-% Beta = atan(Imaginario./Real)/2;
+% Beta = atan (Imaginario./Real)/2;
 % 
 % % Semi-axis
 % % thetao = abs(Ey);
 % Factor1 = sqrt(1-(sin(2*thetao)).^2.*(sin(2*Beta)).^2);
 % 
-% ao = sqrt(E).*sqrt((1+Factor1)/2);
-% bo = sqrt(E).*sqrt((1-Factor1)/2);
+% ao = sqrt (E).*sqrt((1+Factor1)/2);
+% bo = sqrt (E).*sqrt((1-Factor1)/2);
 
 
 
 
 %% Sampling
-Sampling = 64;
+Sampling = 32;
 Spacing1 = 1:floor(N/Sampling):N;
 a1 = ao(Spacing1,Spacing1);
 b1 = bo(Spacing1,Spacing1);
-ref = -pi/2; %For having agreement with polarization ellipse
+ref = -pi/2; % For having agreement with polarization ellipse
 theta1 = thetao(Spacing1,Spacing1)+ref ; 
 
 % Plot ellipse
@@ -131,22 +133,29 @@ big=[1024, 1024];
 small=big./divs;
 pts=2*(small(1)+small(2));
 L=max(abs([a1(:); b1(:)]));
-A(small(1), divs(1), small(2), divs(2))=uint8(0);
+R(small(1), divs(1), small(2), divs(2))=uint8(0);
+G(small(1), divs(1), small(2), divs(2))=uint8(0);
+B(small(1), divs(1), small(2), divs(2))=uint8(0);
 for i=1:divs(1)
     for j=1:divs(2)
         a=a1(i,j)/L;
         b=b1(i,j)/L;
         t=theta1(i,j);
-        A(:,i,:,j)=ellipseCart(a,b,t,small,pts);
+        if h(i,j) > 0
+            B(:,i,:,j)=ellipseCart(a,b,t,small,pts);
+        elseif h(i,j) < 0
+            G(:,i,:,j)=ellipseCart(a,b,t,small,pts);
+        end
     end
 end
-A=reshape(A, big);
+B=reshape(B, big);
+B=imgaussfilt(B);
 figure(1);
-imshow(A,'Border','tight','InitialMagnification','fit');
-colormap(flipud(gray(256)));
+imshow(B,'Border','tight','InitialMagnification','fit');
+colormap((gray(256)));
 axis equal
 
-imwrite(A, 'oh yea.jpg');
+imwrite(B, 'oh yea.jpg');
       
 %% Plot      
 figure(7)
