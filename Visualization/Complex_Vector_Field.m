@@ -110,7 +110,7 @@ ao = sqrt(E).*sqrt((1+Factor1)/2);
 bo = sqrt(E).*sqrt((1-Factor1)/2);
 
 %% Sampling
-Sampling = 8;
+Sampling = 16;
 Spacing1 = 1:floor(N/Sampling):N;
 a1 = ao(Spacing1,Spacing1);
 b1 = bo(Spacing1,Spacing1);
@@ -133,6 +133,7 @@ for i=1:divs(1)
     end
 end
 A=reshape(A, big);
+A=imgaussfilt(A);
 figure(1);
 imshow(A,'Border','tight','InitialMagnification','fit');
 colormap(gray(256));
