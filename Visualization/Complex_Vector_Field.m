@@ -1,8 +1,8 @@
 
 
 % Codigo
-clear all
-clc
+clear all;
+clc;
 % Parametros
 parametros()
 
@@ -121,13 +121,14 @@ h = sign(V); % Signo de orientacion de elipse (+ Left-Hand = Blue. - Right-Had +
 
 %% Sampling
 Sampling = 32;
-Spacing1 = 1:floor(N/Sampling):N;
+Spacing1 = round(linspace(1,N,Sampling));
 a1 = ao(Spacing1,Spacing1);
 b1 = bo(Spacing1,Spacing1);
+h1 = h(Spacing1,Spacing1);
 ref = -pi/2; % For having agreement with polarization ellipse
-theta1 = thetao(Spacing1,Spacing1)+ref ; 
+theta1 = thetao(Spacing1,Spacing1)+ref; 
 
-% Plot ellipse
+%% Plot ellipse
 divs=size(a1);
 big=[1024, 1024];
 small=big./divs;
@@ -141,62 +142,68 @@ for i=1:divs(1)
         a=a1(i,j)/L;
         b=b1(i,j)/L;
         t=theta1(i,j);
-        if h(i,j) > 0
-            B(:,i,:,j)=ellipseCart(a,b,t,small,pts);
-        elseif h(i,j) < 0
-            G(:,i,:,j)=ellipseCart(a,b,t,small,pts);
+        T=ellipseCart(a,b,t,small,pts);
+        if h1(i,j) > 0
+            R(:,i,:,j)=T;
+        elseif h1(i,j) < 0
+            G(:,i,:,j)=T;
+        else
+            B(:,i,:,j)=T;
         end
     end
 end
+R=reshape(R, big);
+G=reshape(G, big);
 B=reshape(B, big);
-B=imgaussfilt(B);
+A=cat(3,R,G,B);
+%A=imgaussfilt(A);
 figure(1);
-imshow(B,'Border','tight','InitialMagnification','fit');
-colormap((gray(256)));
-axis equal
+imshow(A,'Border','tight','InitialMagnification','fit');
+colormap(gray(256));
+axis equal;
 
-imwrite(B, 'oh yea.jpg');
+imwrite(A, 'oh yea.jpg');
       
 %% Plot      
-figure(7)
+figure(2);
 
-subplot(2,2,1)
-imagesc(ao)
-title( ' ao ') 
-axis equal
+subplot(2,2,1);
+imagesc(ao);
+title('ao');
+axis equal;
 
-subplot(2,2,2)
-imagesc(bo)
-title( ' bo ') 
-axis equal
+subplot(2,2,2);
+imagesc(bo);
+title('bo');
+axis equal;
 
-subplot(2,2,3)
-imagesc(ao + bo)
-axis equal
+subplot(2,2,3);
+imagesc(ao + bo);
+axis equal;
 
-subplot(2,2,4)
-imagesc(thetao)
-title( ' thetao ') 
-colormap(hot)
-axis equal
+subplot(2,2,4);
+imagesc(thetao);
+title('thetao'); 
+colormap(hot);
+axis equal;
 
 
-figure(8)
-subplot(2,2,1)
-imagesc(Ex.*conj(Ex))
-title( ' Ex ') 
-axis equal
+figure(3);
+subplot(2,2,1);
+imagesc(Ex.*conj(Ex));
+title('Ex');
+axis equal;
 
-subplot(2,2,2)
-imagesc(Ey.*conj(Ey))
-title( ' Ey ') 
-axis equal
+subplot(2,2,2);
+imagesc(Ey.*conj(Ey));
+title('Ey');
+axis equal;
 
-subplot(2,2,3)
-imagesc(E)
-title( ' E ') 
-axis equal
-colormap(hot)
+subplot(2,2,3);
+imagesc(E);
+title('E'); 
+axis equal;
+colormap(hot);
 
 
 
