@@ -1,50 +1,12 @@
 % Parametros
-parametros()
-global x y
-
-
-%% Prueba Elipse
-
-% Theta = pi/4;
-% 
-% Eox = cos(Theta);
-% Eoy = sin(Theta);
-% Ex = Eox.*ones(N,N);
-% Ey = -Eoy.*exp (-1i*pi/2).*ones(N,N);
-% 
-% 
-% E = sqrt(Ex.*conj(Ex)+ Ey.*conj(Ey)); 
-% 
-% Ex = Ex./E;
-% Ey = Ey./E;
-% 
-% 
-% display(max(abs(Ex(:))))
-% display(max(abs(Ey(:))))
-% display(max(E(:)))
-
-
-%% Prueba 1 (Radial, Azimuthal and Espiral)
-% k = 0.3;
-% l = 1;
-% sigma = -1;
-% phi0 = pi/4;
-% 
-% Bessel = besselj(l,k.*r);
-% 
-% g1 = cos((l+sigma).*th+l*phi0);
-% g2 = -sigma.*sin((l+sigma).*th+l*phi0);
-% Ex = Bessel.*(g1.*cos(th)-g2.*sin(th));
-% Ey = Bessel.*(g1.*sin(th)+g2.*cos(th));
-% 
-% E = sqrt(Ex.*conj(Ex)+ Ey.*conj(Ey));
-% 
-% Ex = Ex./E;
-% Ey = Ey./E;
-
+N=512;
+[xx,yy]=meshgrid(sqrt(pi/(2*N))*(-N:2:N-2));
 
 %% Prueba Bessel - Poincare
-[Ex,Ey]=BPBeam(0.2,1,2,x,y);
+A=1/sqrt(2)*[1 1; 1i -1i];
+Ex=BPBeam(1,2,w,xx,yy);
+Ey=BPBeam(2,1,w,xx,yy);
+[Ex, Ey]=TransformBeam(A, Ex, Ey);
 E=hypot(Ex, Ey);
 Ex=Ex./E;
 Ey=Ey./E;
@@ -69,38 +31,36 @@ a1 = ao(Spacing1,Spacing1);
 b1 = bo(Spacing1,Spacing1);
 h1 = h(Spacing1,Spacing1);
 ref = -pi/2; % For having agreement with polarization ellipse
-theta1 = thetao(Spacing1,Spacing1)+ref; 
+th1 = thetao(Spacing1,Spacing1)+ref; 
 
 %% Plot ellipse
 clear R G B A;
 divs=size(a1);
-big=[1024, 1024];
+big=size(E);
 small=big./divs;
 pts=2*(small(1)+small(2));
-L=max(abs([a1(:); b1(:)]));
 R(small(1), divs(1), small(2), divs(2))=uint8(0);
 G(small(1), divs(1), small(2), divs(2))=uint8(0);
 B(small(1), divs(1), small(2), divs(2))=uint8(0);
 for i=1:divs(1)
     for j=1:divs(2)
-        a=a1(i,j)/L;
-        b=b1(i,j)/L;
-        t=theta1(i,j);
-        T=ellipseCart(a,b,t,small,pts); 
-        if h1(i,j) > 0
-            R(:,i,:,j)=T;
-        elseif h1(i,j) < 0
-            G(:,i,:,j)=T;
-        else
-            B(:,i,:,j)=T;
-        end
+        col=[255*(1+h1(i,j))/2,0, 255*(1-h1(i,j))/2];
+        T=ellipseCart(a1(i,j),b1(i,j),th1(i,j),small,pts);
+        R(:,i,:,j)=col(1)*T;
+        G(:,i,:,j)=col(2)*T;
+        B(:,i,:,j)=col(3)*T;
     end
 end
 R=reshape(R, big);
 G=reshape(G, big);
 B=reshape(B, big);
+idx=(R==0 & G==0 & B==0);
+[I1,I2,I3]=ind2rgb(round(255*(E/max(E(:))).^2),gray(256));
+R(idx)=255*I1(idx);
+G(idx)=255*I2(idx);
+B(idx)=255*I3(idx);
 A=cat(3,R,G,B);
-A=imgaussfilt(A);
+
 figure(1);
 imshow(A,'Border','tight','InitialMagnification','fit');
 colormap(gray(256));

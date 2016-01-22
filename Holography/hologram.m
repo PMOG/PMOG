@@ -7,12 +7,17 @@ function [] = hologram(N, k, theta, p, l, w)
 % p : radial order
 % l : topological charge
 % w : radius
+%
+% Example
+% hologram([1920,1080],[500,0],45,0,[1,0],1)
+
 grid=size(l);
 N([1 2])=fliplr(N);
 points=N./grid;
 range=N/min(N);
 
-p(1:grid(1), 1:grid(2))=p; 
+k(1:grid(1), 1:grid(2))=k;
+p(1:grid(1), 1:grid(2))=p;
 w(1:grid(1), 1:grid(2))=w;
 x=linspace(-range(1), range(1), points(1));
 y=linspace(-range(2), range(2), points(2));
@@ -22,7 +27,7 @@ A(points(1), grid(1), points(2), grid(2))=uint8(0);
 for i=1:grid(1)
     for j=1:grid(2)
         E=LGBeam(p(i,j), l(i,j), w(i,j), xx, yy);
-        A(:,i,:,j)=planeWave(E, xx, yy, k, theta, 0);
+        A(:,i,:,j)=planeWave(E, xx, yy, k(i,j), theta, 0);
     end
 end
 A=reshape(A, N);

@@ -1,11 +1,9 @@
-function [Ex, Ey] = BPBeam(k,l0,l1,xx,yy)
-% Bessel Poincare Beam
+function [E] = BPBeam(l, m, w, xx, yy)
+% Generates a Bessel-Poincare Beam on coordinates [xx, yy] with parameters
+% l: radial order
+% m: topological charge
+% w: waist
 rr=hypot(xx,yy);
-tt=atan2(yy,xx);
-
-J0 = besselj(l0,k*rr);
-J1 = besselj(l1,k*rr);
-
-Ex = J0+J1.*exp(1i*tt);
-Ey = 1i*(J0-J1.*exp(1i*tt));
+th=atan2(yy,xx);
+E=besselj(l,rr/w).*exp(1i*m*th);
 end
