@@ -8,17 +8,17 @@ Q=1/sqrt(2)*[1 1; 1i -1i];
 [Ex, Ey]=TransformBeam(Q, Ex, Ey);
 E=hypot(Ex, Ey);
 
-%% Parametros Stokes y Elipse de Polarizacion
+% Stokes Parameters
 [I,Q,U,V]=StokesParams(Ex./E,Ey./E);
 L=hypot(Q,U);
 
 % Elipse
-a=(I+L)/2; % Semieje mayor
-b=(I-L)/2; % Semieje menor
-phi=atan2(U,Q)/2; % Angulo con respecto a eje x
-h=sign(V); % Signo de orientacion de elipse (+ Left-Hand = Blue. - Right-Hand = Red)
+a=(I+L)/2; % Semi-major axis
+b=(I-L)/2; % Semi-minor axis
+phi=atan2(U,Q)/2; % Rotation angle
+h=sign(V); % Handedness: (-) Lefthanded = Blue (+) Right-Hand = Red
 
-%% Sampling
+% Sampling
 samp = 32;
 ip = round(linspace(1,N,samp));
 a1 = a(ip,ip);
@@ -26,7 +26,7 @@ b1 = b(ip,ip);
 h1 = h(ip,ip);
 phi1 = phi(ip,ip); 
 
-%% Plot ellipse
+% Plot ellipse
 col=eye(3);
 divs=size(a1);
 big=size(E);
@@ -43,43 +43,29 @@ for i=1:divs(1)
         B(id)=p(3);
     end
 end
-     
-%% Plot      
+A=cat(3,R,G,B);
+
+% Plot      
 figure(2);
 cmap=hot(256);
 colormap(cmap);
 
 subplot(2,3,1);
-imagesc(a);
-title('a');
-axis equal off;
-
+imagesc(a); title('a'); axis equal off;
 subplot(2,3,2);
-imagesc(b);
-title('b');
-axis equal off;
-
+imagesc(b); title('b');axis equal off;
 subplot(2,3,3);
-imagesc(phi);
-title('theta'); 
-axis equal off;
+imagesc(phi); title('theta'); axis equal off;
 
 subplot(2,3,4);
-imagesc(Ex.*conj(Ex));
-title('|Ex|^2');
-axis equal off;
+imagesc(Ex.*conj(Ex)); title('|Ex|^2'); axis equal off;
 
 subplot(2,3,5);
-imagesc(Ey.*conj(Ey));
-title('|Ey|^2');
-axis equal off;
+imagesc(Ey.*conj(Ey)); title('|Ey|^2'); axis equal off;
 
 subplot(2,3,6);
-imagesc(E.*E);
-title('|E|^2=|Ex|^2+|Ey|^2'); 
-axis equal off;
+imagesc(E.*E); title('|E|^2=|Ex|^2+|Ey|^2'); axis equal off;
 
-A=cat(3,R,G,B);
 figure(1);
 imshow(A,'Border','tight','InitialMagnification','fit');
 axis equal;
