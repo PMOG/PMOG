@@ -20,7 +20,7 @@ h=sign(V); % Signo de orientacion de elipse (+ Left-Hand = Blue. - Right-Hand = 
 
 %% Sampling
 samp = 32;
-ip = round(linspace(1+N/(2*samp),N-N/(2*samp),samp));
+ip = round(linspace(1,N,samp));
 a1 = a(ip,ip);
 b1 = b(ip,ip);
 h1 = h(ip,ip);
