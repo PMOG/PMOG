@@ -1,4 +1,4 @@
-function [] = hologram(N, k, theta, p, l, w)
+function [] = hologram(N, k, th, p, l, w)
 % Generates Gaussian beam hologram
 % N(1), N(2) : number of pixels along each dimension
 % m : number of grids
@@ -19,6 +19,7 @@ range=N/min(N);
 k(1:grid(1), 1:grid(2))=k;
 p(1:grid(1), 1:grid(2))=p;
 w(1:grid(1), 1:grid(2))=w;
+th(1:grid(1), 1:grid(2))=th;
 x=linspace(-range(1), range(1), points(1));
 y=linspace(-range(2), range(2), points(2));
 [yy,xx]=meshgrid(y,x);
@@ -27,7 +28,7 @@ A(points(1), grid(1), points(2), grid(2))=uint8(0);
 for i=1:grid(1)
     for j=1:grid(2)
         E=LGBeam(p(i,j), l(i,j), w(i,j), xx, yy);
-        A(:,i,:,j)=planeWave(E, xx, yy, k(i,j), theta, 0);
+        A(:,i,:,j)=grating(E, xx, yy, k(i,j), th(i,j), 1);
     end
 end
 A=reshape(A, N);
