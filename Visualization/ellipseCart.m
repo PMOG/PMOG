@@ -18,7 +18,7 @@ h1 = h(ip,ip);
 phi1 = phi(ip,ip); 
 
 % Plot ellipse
-col=eye(3);
+cmap=eye(3);
 divs=size(a1);
 big=size(E);
 small=big./divs;
@@ -31,13 +31,13 @@ yt=sin(s);
 for i=1:divs(1)
     for j=1:divs(2)
         % Rotate
-        xr= cos(phi1(i,j))*a1(i,j)*xt+sin(phi1(i,j))*b1(i,j)*yt;
-        yr=-sin(phi1(i,j))*a1(i,j)*xt+cos(phi1(i,j))*b1(i,j)*yt;
+        xr=cos(phi1(i,j))*a1(i,j)*xt-sin(phi1(i,j))*b1(i,j)*yt;
+        yr=sin(phi1(i,j))*a1(i,j)*xt+cos(phi1(i,j))*b1(i,j)*yt;
         % Index
         idx=floor(small(1)*(xr+1)/2);
         idy=small(2)-1-floor(small(2)*(yr+1)/2);
-        id=(((j-1)*small(1)+idx+1)*divs(1)-i)*small(2)+idy+1;
-        p=col(2-h1(i,j),:);
+        id=(((j-1)*small(1)+idx)*divs(1)+i-1)*small(2)+idy+1;
+        p=cmap(2-h1(i,j),:);
         R(id)=p(1);
         G(id)=p(2);
         B(id)=p(3);
