@@ -10,6 +10,8 @@ if(mod(n,2)==1 && mod(m,2)==1)
 end
 th(idx)=pi/4*(vv(idx)./uu(idx));
 th(~idx)=pi/4*(2-uu(~idx)./vv(~idx));
+th(rr<0)=pi+th(rr<0);
+rr=abs(rr);
 xx=rr.*cos(th);
 yy=rr.*sin(th);
 end

@@ -1,0 +1,3 @@
+[submodule "lib/MATLAB"]
+	path = lib/MATLAB
+	url = https://github.com/PabloBrubeck/MATLAB
