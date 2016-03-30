@@ -5,7 +5,7 @@ Exx=conj(Ex).*Ex;
 Eyy=conj(Ey).*Ey;
 Exy=conj(Ex).*Ey;
 I=Exx+Eyy;
-Q=Exx-Eyy;
-U=2*real(Exy);
-V=2*imag(Exy);
+Q=(Exx-Eyy)./I;
+U=2*real(Exy)./I;
+V=2*imag(Exy)./I;
 end

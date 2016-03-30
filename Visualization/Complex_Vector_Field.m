@@ -3,11 +3,11 @@ N=640;
 
 w=1/sqrt(pi*8);
 Q=1/sqrt(2)*[1 1; 1i -1i];
-Ex=BPBeam(0,1,w,xx,yy);
-Ey=BPBeam(1,0,w,xx,yy);
-[Ex, Ey]=TransformBeam(Q, Ex, Ey);
-% Ex=exp(1i*(xx+yy));
-% Ey=exp(1i*(xx-yy));
+m1=1; m2=0;
+
+L=BPBeam(m1,m1,w,xx,yy);
+R=BPBeam(m2,m2,w,xx,yy);
+[Ex, Ey]=TransformBeam(Q, L, R);
 A=ellipseCart(Ex,Ey,32);
 
 figure(1);
