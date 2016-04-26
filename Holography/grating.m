@@ -11,5 +11,5 @@ H=mod(phase+k*plane+pi, 2*pi)-pi;
 if mode 
     H=(E.*conj(E)).*H;
 end
-H=uint8(255*H/(2*pi)); % Normalize to grayscale
+H=uint8(255*(H+pi)/(2*pi)); % Normalize to grayscale
 end
