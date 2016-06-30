@@ -1,6 +1,6 @@
-function [] = hologram(N, k, th, p, l, w)
+function [] = hologram(res, k, th, p, l, w)
 % Generates Gaussian beam hologram
-% N(1), N(2) : number of pixels along each dimension
+% res(1), res(2) : number of pixels along each dimension
 % m : number of grids
 % k : grating
 % theta : grid orientation
@@ -9,12 +9,12 @@ function [] = hologram(N, k, th, p, l, w)
 % w : radius
 %
 % Example
-% hologram([1920,1080],[500,0],45,0,[1,0],1)
+% hologram([1920,1080],20,0,0,[0,1;2,3],1)
 
 grid=size(l);
-N([1 2])=fliplr(N);
-points=N./grid;
-range=N/min(N);
+res([1 2])=fliplr(res);
+points=res./grid;
+range=res/min(res);
 
 k(1:grid(1), 1:grid(2))=k;
 p(1:grid(1), 1:grid(2))=p;
@@ -31,8 +31,8 @@ for i=1:grid(1)
         A(:,i,:,j)=grating(E, xx, yy, k(i,j), th(i,j), 1);
     end
 end
-A=reshape(A, N);
-figure(2); imshow(A,'Border','tight','InitialMagnification','fit');
+A=reshape(A, res);
+imshow(A,'Border','tight','InitialMagnification','fit');
 map=gray(256); colormap(map); 
 
 %fullscreen(cat(3,A,A,A), 2);
