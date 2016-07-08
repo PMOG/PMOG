@@ -32,6 +32,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PartiallyCoherentCUDA}&quot;"/>
 									<listOptionValue builtIn="false" value="/home/pbrubeck/ParallelUniverse/common/inc"/>
 								</option>
+								<option id="nvcc.compiler.usefastmath.1625659531" superClass="nvcc.compiler.usefastmath" value="true" valueType="boolean"/>
 								<inputType id="nvcc.compiler.input.cu.187617704" superClass="nvcc.compiler.input.cu"/>
 								<inputType id="nvcc.compiler.input.cpp.13738024" superClass="nvcc.compiler.input.cpp"/>
 								<inputType id="nvcc.compiler.input.c.1885352904" superClass="nvcc.compiler.input.c"/>
@@ -44,6 +45,9 @@
 								<option id="nvcc.linker.option.linkgl.475091640" name="Link with OpenGL libraries" superClass="nvcc.linker.option.linkgl" value="true" valueType="boolean"/>
 								<option id="nvcc.linker.option.userobjs.378631361" name="Other objects" superClass="nvcc.linker.option.userobjs" valueType="userObjs">
 									<listOptionValue builtIn="false" value="${cuda_samples_common_lib_dir:/PartiallyCoherentCUDA}/libGLEW.a"/>
+								</option>
+								<option id="nvcc.linker.option.libs.1148882068" name="Libraries (-l)" superClass="nvcc.linker.option.libs" valueType="libs">
+									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="curand"/>
 								</option>
 								<inputType id="nvcc.linker.input.508605697" superClass="nvcc.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -66,6 +70,7 @@
 					<sass major="5" minor="2"/>
 					<ptx major="5" minor="2"/>
 				</executable>
+				<editor-arch major="5" minor="2"/>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
 		</cconfiguration>
@@ -143,7 +148,14 @@
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule cpu="Native" moduleId="nsight.localTarget"/>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/PartiallyCoherentCUDA"/>
+		</configuration>
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/PartiallyCoherentCUDA"/>
+		</configuration>
+	</storageModule>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		<scannerConfigBuildInfo instanceId="com.nvidia.cuda.ide.seven_five.configuration.release.389448152;com.nvidia.cuda.ide.seven_five.configuration.release.389448152.;nvcc.compiler.base.930817353;nvcc.compiler.input.cpp.1150921967">
@@ -165,4 +177,5 @@
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.nvidia.cuda.ide.build.NVCCPerProjectProfile"/>
 		</scannerConfigBuildInfo>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>
