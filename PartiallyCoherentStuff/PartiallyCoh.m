@@ -15,7 +15,7 @@ Ne=200;      % cantidad de ensambles
 a=80;%       % radio del circulo donde se generan los vortices a = [80,50,10]
 
 % Folders
-directory = '/mnt/bendata/Documents/Holograms/';
+directory = pwd;
 directoryInfo = ['m',num2str(m),'a',num2str(a),'w0',num2str(w0),'-'];
 directoryDate = [directoryInfo, sprintf('%u-%u-%u-%u-%u-%2.0f',clock),'/'];
 mkdir(directory,directoryDate);
@@ -57,13 +57,13 @@ yv = r.*sin(theta);
 AmplitudeField = abs(U);
 AmplitudeField = AmplitudeField./max(max(AmplitudeField));
 
-PhaseField = angle(U);
-PhaseHologram = AmplitudeField.*(mod(PhaseField + angle(exp(1i*(2*pi*(X)/ParameterHol))), 2*pi)/pi-1)+1;
+% PhaseField = angle(U);
+% PhaseHologram = AmplitudeField.*(mod(PhaseField + angle(exp(1i*(2*pi*(X)/ParameterHol))), 2*pi)/pi-1)+1;
 
-% figure(1),
-% imagesc(abs(U))
-% colormap gray
-% axis('equal','tight','off')
+figure(1),
+imagesc(abs(U))
+colormap gray
+axis('equal','tight','off')
 % 
 % figure(2),
 % imagesc(PhaseHologram)
@@ -71,12 +71,12 @@ PhaseHologram = AmplitudeField.*(mod(PhaseField + angle(exp(1i*(2*pi*(X)/Paramet
 % axis('equal','tight','off')
 
 % Create file with hologram encoded
-imwrite(PhaseHologram./max(max(PhaseHologram)),...
-    [directory,...
-    directoryDate,...
-    'PC',...
-    num2str(iteration,'%.3d'),...
-    '.jpg'],...
-    'Mode','lossy','Quality',100)
+% imwrite(PhaseHologram./max(max(PhaseHologram)),...
+%     [directory,...
+%     directoryDate,...
+%     'PC',...
+%     num2str(iteration,'%.3d'),...
+%     '.jpg'],...
+%     'Mode','lossy','Quality',100)
 end
 % time=toc;

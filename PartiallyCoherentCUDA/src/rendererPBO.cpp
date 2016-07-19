@@ -11,10 +11,10 @@
 extern float animTime;
 
 // constants (the following should be a const in a header file)
-int2 image={1<<10, 1<<10};
+int2 image={1<<9, 1<<9};
 
 void init_kernel(int2 image);
-void launch_kernel(uchar4* d_pixel, int2 image, float time);
+void launch_kernel(int2 image, uchar4* d_pixel, float time);
 
 // variables
 GLuint pbo;
@@ -94,7 +94,7 @@ void runCuda(){
 	cudaGLMapBufferObject((void**)&d_pixel, pbo);
 
 	// execute the kernel
-	launch_kernel(d_pixel, image, animTime);
+	launch_kernel(image, d_pixel, animTime);
 
 	// unmap buffer object
 	cudaGLUnmapBufferObject(pbo);

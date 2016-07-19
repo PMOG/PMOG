@@ -16,7 +16,7 @@ xmax=2*w0;
 %Yo soy el Alfa y la Omega, el principio y el fin, dice el Señor, el que
 %es y que era y que ha de venir, el Todopoderoso
 %xmax=puntos/2;
-a=1;% w0*0.4;    % radio del circulo donde se generan los vortices
+a=0.6;% w0*0.4;    % radio del circulo donde se generan los vortices
 % a=0.8; 0.55
 %a=100*256/1024;
 
