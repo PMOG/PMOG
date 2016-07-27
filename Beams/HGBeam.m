@@ -3,7 +3,6 @@ function [E] = HGBeam(m, n, w, xx, yy)
 % m: x order
 % n: y order
 % w: waist
-rr2=xx.^2+yy.^2;
 cx(m+1)=1; cy(n+1)=1;
-E=HermiteH(cx, sqrt(2)/w*xx).*HermiteH(cy, sqrt(2)/w*yy).*exp(-rr2/w^2);
+E=HermitePsi(cx, sqrt(2)/w*xx).*HermitePsi(cy, sqrt(2)/w*yy);
 end
