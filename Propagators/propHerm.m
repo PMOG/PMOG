@@ -1,5 +1,5 @@
 function [] = propHerm(n)
-lambda=1;
+lambda=2;
 k=2*pi/lambda;
 
 w0=sqrt(2)/2;          % waist size
@@ -9,9 +9,10 @@ zr=pi/lambda*w0^2;     % Rayleigh Range
 [xx,yy]=meshgrid(x);   % 2D nodes
 
 nframes=100;           % Simualtion parameters
-dz=4*zr/nframes;
+dz=5*zr/nframes;
 
-E=LGBeam(2,-2,w0,xx,yy)+LGBeam(2,1,w0,xx,yy);  % Electric field
+rr2=(xx.^2+yy.^2)/w0^2;
+E=LGBeam(3,2,w0,xx,yy);      % Electric field
 Q=expm(1i*dz/(2*k)*D^2);     % Propagation operator
 
 % Interpolation and display
@@ -24,8 +25,12 @@ phase=phase-floor(phase);
 H=ind2rgb(uint8((length(map)-1)*phase), map);
 V=mat2gray(abs(Eq).^2);
 V=cat(3, V, V, V);
-h=image(H.*V); axis equal; axis off;
 
+figure(1);
+h1=image(H.*V); axis equal; axis off;
+figure(2);
+h2=plot(xq(end/2,:), [abs(Eq(end/2,:)).^2; real(Eq(end/2,:)); imag(Eq(end/2,:))]);
+ylim([-1,1]);
 
 % Variance calculator
 r2=xx.^2+yy.^2;
@@ -43,7 +48,8 @@ for i=1:nframes
     H=ind2rgb(uint8((length(map)-1)*phase), map);
     V=mat2gray(abs(Eq).^2);
     V=cat(3, V, V, V);
-    set(h,'CData',V.*H);
+    set(h1,'CData',H.*V);
+    set(h2,{'YData'},{abs(Eq(end/2,:)).^2; real(Eq(end/2,:)); imag(Eq(end/2,:))});
     drawnow;
     
     var2=real(E(:)'*(R(:).*E(:)));
