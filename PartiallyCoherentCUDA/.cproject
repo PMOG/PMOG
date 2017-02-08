@@ -33,7 +33,8 @@
 									<listOptionValue builtIn="false" value="/home/pbrubeck/ParallelUniverse/common/inc"/>
 								</option>
 								<option id="nvcc.compiler.usefastmath.1625659531" name="Make use of fast math library (-use_fast_math)" superClass="nvcc.compiler.usefastmath" value="true" valueType="boolean"/>
-								<option id="com.nvidia.cuda.ide.build.option1.1374192436" superClass="com.nvidia.cuda.ide.build.option1" value="/usr/bin/g++-4.9" valueType="string"/>
+								<option id="com.nvidia.cuda.ide.build.option1.1374192436" name="Compiler Path (-ccbin)" superClass="com.nvidia.cuda.ide.build.option1" value="/usr/bin/g++-4.9" valueType="string"/>
+								<option id="nvcc.compiler.cpp11option.1914775928" name="Enable C++11 support (-std=c++11)" superClass="nvcc.compiler.cpp11option" value="true" valueType="boolean"/>
 								<inputType id="nvcc.compiler.input.cu.187617704" superClass="nvcc.compiler.input.cu"/>
 								<inputType id="nvcc.compiler.input.cpp.13738024" superClass="nvcc.compiler.input.cpp"/>
 								<inputType id="nvcc.compiler.input.c.1885352904" superClass="nvcc.compiler.input.c"/>
@@ -106,6 +107,9 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PartiallyCoherentCUDA}&quot;"/>
 									<listOptionValue builtIn="false" value="/home/pbrubeck/ParallelUniverse/common/inc"/>
 								</option>
+								<option id="nvcc.compiler.usefastmath.1305734525" name="Make use of fast math library (-use_fast_math)" superClass="nvcc.compiler.usefastmath" value="true" valueType="boolean"/>
+								<option id="nvcc.compiler.cpp11option.1994775935" name="Enable C++11 support (-std=c++11)" superClass="nvcc.compiler.cpp11option" value="true" valueType="boolean"/>
+								<option id="com.nvidia.cuda.ide.build.option1.1131799560" name="Compiler Path (-ccbin)" superClass="com.nvidia.cuda.ide.build.option1" value="/usr/bin/g++-4.9" valueType="string"/>
 								<inputType id="nvcc.compiler.input.cu.1092661561" superClass="nvcc.compiler.input.cu"/>
 								<inputType id="nvcc.compiler.input.cpp.1150921967" superClass="nvcc.compiler.input.cpp"/>
 								<inputType id="nvcc.compiler.input.c.914109871" superClass="nvcc.compiler.input.c"/>
@@ -118,6 +122,9 @@
 								<option id="nvcc.linker.option.linkgl.594280434" name="Link with OpenGL libraries" superClass="nvcc.linker.option.linkgl" value="true" valueType="boolean"/>
 								<option id="nvcc.linker.option.userobjs.576734150" name="Other objects" superClass="nvcc.linker.option.userobjs" valueType="userObjs">
 									<listOptionValue builtIn="false" value="${cuda_samples_common_lib_dir:/PartiallyCoherentCUDA}/libGLEW.a"/>
+								</option>
+								<option id="nvcc.linker.option.libs.85804805" superClass="nvcc.linker.option.libs" valueType="libs">
+									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="curand"/>
 								</option>
 								<inputType id="nvcc.linker.input.2015841536" superClass="nvcc.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -141,6 +148,7 @@
 					<sass major="5" minor="2"/>
 					<ptx major="5" minor="2"/>
 				</executable>
+				<editor-arch major="5" minor="2"/>
 			</storageModule>
 		</cconfiguration>
 	</storageModule>
@@ -150,10 +158,10 @@
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule cpu="Native" moduleId="nsight.localTarget"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
-		<configuration configurationName="Debug">
+		<configuration configurationName="Release">
 			<resource resourceType="PROJECT" workspacePath="/PartiallyCoherentCUDA"/>
 		</configuration>
-		<configuration configurationName="Release">
+		<configuration configurationName="Debug">
 			<resource resourceType="PROJECT" workspacePath="/PartiallyCoherentCUDA"/>
 		</configuration>
 	</storageModule>

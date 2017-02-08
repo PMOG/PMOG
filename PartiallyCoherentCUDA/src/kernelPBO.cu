@@ -8,13 +8,13 @@
 #include <thrust/reduce.h>
 #include <float.h>
 
-#define NSTREAMS 1
-#define MAXTHREADS 512
+#define NSTREAMS 8
+#define NTHREADS 512
 #define COLORDEPTH 256
 
 double2 axes=make_double2(4, 4);
 double2 origin=make_double2(-2, -2);
-int2 ensemble=make_int2(200,200);
+int2 ensemble=make_int2(256,256);
 
 uchar4 *d_cmap;
 float3 *d_points;
@@ -129,7 +129,7 @@ void init_kernel(int2 image){
 
 	// Initialize colormap
 	cudaMalloc((void**)&d_cmap, COLORDEPTH*sizeof(uchar4));
-	gray<<<1, COLORDEPTH>>>(d_cmap, COLORDEPTH);
+	hot<<<1, COLORDEPTH>>>(d_cmap, COLORDEPTH);
 
 	// Allocate field, intensity, and cross-correlation
 	cudaMalloc((void**)&d_field, NSTREAMS*npixels*sizeof(float2));
@@ -150,13 +150,13 @@ void init_kernel(int2 image){
 	curandGenerateUniform(generator, (float*)d_points, 3*npoints);
 
 	// Map to unit disk
-	const dim3 block(MAXTHREADS);
+	const dim3 block(NTHREADS);
 	const dim3 grid(ceil(npoints, block.x));
 	diskPointPicking<<<grid,block>>>(npoints, d_points);
 }
 
 void launch_kernel(int2 image, uchar4* d_pixel, float time){
-	static const dim3 block(MAXTHREADS);
+	static const dim3 block(NTHREADS);
 	static const dim3 grid(ceil(image.x, block.x), ceil(image.y, block.y));
 	static int k=0;
 
