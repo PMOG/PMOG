@@ -1,4 +1,4 @@
-function [] = tweezersGeom(N)
+function [kx] = tweezersGeomK(N)
 % Physical params
 a=1;
 ns=1.496;
@@ -12,8 +12,8 @@ R0=a*tan(th0);
 f=(1.5*R0)/NA;
 
 % Plot params
-Nq=[64,20];
-L=0.1;
+Nq=[256,32];
+L=2;
 
 th=linspace(0,th0,N);
 phi=2*pi*(0:N-1)/N;
@@ -54,49 +54,21 @@ function F=force(r,g)
     F=nm*(2*pi*th0)/N^2*squeeze(sum(sum(dF)));
 end
 
-xq=linspace(-L,L,Nq(1));
-[xx,zz]=meshgrid(xq);
-rr=hypot(xx,zz);
-gg=atan2(xx,zz);
-uu=zeros(size(zz));
-for i=1:Nq(1)
-    for j=1:Nq(1)
-        uu(i,j)=[1 0 1i]*force(rr(i,j),gg(i,j));
-    end
+dx=0.003;
+x=0.003:dx:0.3;
+Fx=zeros(size(x));
+for i=1:length(x)
+    Fx(i)=[1,0,0]*force(x(i),-pi/2);
 end
-uu=abs(uu);
 
-figure(1);clf;
-hold on;
-imagesc(xq,xq,uu); 
-colormap(hot(256));
-
-xq=linspace(-L,L,Nq(2));
-[xx,zz]=meshgrid(xq);
-rr=hypot(xx,zz);
-gg=atan2(xx,zz);
-vv=zeros(size(zz));
-for i=1:Nq(2)
-    for j=1:Nq(2)
-        vv(i,j)=[1 0 1i]*force(rr(i,j),gg(i,j));
-    end
-end
-vv=vv./abs(vv);
-quiver(xx,zz,real(vv),imag(vv),'w','LineWidth',0.75);
-hold off;
-
-xlim([-L,L]);
-ylim([-L,L]);
-
-tk=[-L,0,L];
-axis square;
+plot(x,Fx,'-ok', 'MarkerFaceColor', 'k');
+xlim([0,0.035]);
+ylim([0,0.12]);
 set(gcf,'DefaultTextInterpreter','latex');
 set(gca,'TickLabelInterpreter','latex','fontsize',14);
-set(gca, 'XTick', tk);
-set(gca, 'YTick', tk);
-xlabel('$x/a$');
-ylabel('$z/a$');
-title('$\vec{F}/$pN');
-colorbar();
+xlabel('$\Delta x/\mu$m');
+title('$F_x$/pN');
+
+kx=mean(diff(Fx)/dx);
 end
 
