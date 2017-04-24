@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     52652,       1168]
-NotebookOptionsPosition[     52105,       1144]
-NotebookOutlinePosition[     52443,       1159]
-CellTagsIndexPosition[     52400,       1156]
+NotebookDataLength[     52359,       1156]
+NotebookOptionsPosition[     51926,       1136]
+NotebookOutlinePosition[     52264,       1151]
+CellTagsIndexPosition[     52221,       1148]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -892,13 +892,13 @@ Cell[BoxData[{
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`n1$$ = 2., $CellContext`n2$$ = 
-    2., $CellContext`n3$$ = 0.72, $CellContext`\[Theta]0$$ = Rational[1, 2] 
+   DynamicModuleBox[{$CellContext`n1$$ = 1.5, $CellContext`n2$$ = 
+    1.5, $CellContext`n3$$ = 1.5, $CellContext`\[Theta]0$$ = Rational[1, 2] 
     Pi, $CellContext`\[Theta]1$$ = Rational[1, 2] 
     Pi, $CellContext`\[Theta]2$$ = Rational[1, 2] 
     Pi, $CellContext`\[Theta]3$$ = Rational[1, 2] Pi, $CellContext`\[Phi]0$$ =
      Pi, $CellContext`\[Phi]1$$ = Rational[7, 4] Pi, $CellContext`\[Phi]2$$ = 
-    Rational[1, 4] Pi, $CellContext`\[Phi]3$$ = 3.3426545834195402`, 
+    Rational[1, 4] Pi, $CellContext`\[Phi]3$$ = Rational[3, 4] Pi, 
     Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
     Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
     1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
@@ -914,12 +914,12 @@ Cell[BoxData[
        Hold[$CellContext`n2$$], 1.5}, 0, 2}, {{
        Hold[$CellContext`n3$$], 1.5}, 0, 2}}, Typeset`size$$ = {
     360., {204., 209.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = True, $CellContext`\[Theta]0$3615175$$ = 
-    0, $CellContext`\[Phi]0$3615176$$ = 0, $CellContext`\[Theta]1$3615177$$ = 
-    0, $CellContext`\[Phi]1$3615178$$ = 0, $CellContext`\[Theta]2$3615179$$ = 
-    0, $CellContext`\[Phi]2$3615180$$ = 0, $CellContext`\[Theta]3$3615181$$ = 
-    0, $CellContext`\[Phi]3$3615182$$ = 0, $CellContext`n1$3615183$$ = 
-    0, $CellContext`n2$3615184$$ = 0}, 
+    Typeset`skipInitDone$$ = True, $CellContext`\[Theta]0$4234782$$ = 
+    0, $CellContext`\[Phi]0$4234783$$ = 0, $CellContext`\[Theta]1$4234784$$ = 
+    0, $CellContext`\[Phi]1$4234785$$ = 0, $CellContext`\[Theta]2$4234786$$ = 
+    0, $CellContext`\[Phi]2$4234787$$ = 0, $CellContext`\[Theta]3$4234788$$ = 
+    0, $CellContext`\[Phi]3$4234789$$ = 0, $CellContext`n1$4234790$$ = 
+    0, $CellContext`n2$4234791$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, 
       "Variables" :> {$CellContext`n1$$ = 1.5, $CellContext`n2$$ = 
@@ -932,16 +932,16 @@ Cell[BoxData[
         Rational[7, 4] Pi, $CellContext`\[Phi]2$$ = 
         Rational[1, 4] Pi, $CellContext`\[Phi]3$$ = Rational[3, 4] Pi}, 
       "ControllerVariables" :> {
-        Hold[$CellContext`\[Theta]0$$, $CellContext`\[Theta]0$3615175$$, 0], 
-        Hold[$CellContext`\[Phi]0$$, $CellContext`\[Phi]0$3615176$$, 0], 
-        Hold[$CellContext`\[Theta]1$$, $CellContext`\[Theta]1$3615177$$, 0], 
-        Hold[$CellContext`\[Phi]1$$, $CellContext`\[Phi]1$3615178$$, 0], 
-        Hold[$CellContext`\[Theta]2$$, $CellContext`\[Theta]2$3615179$$, 0], 
-        Hold[$CellContext`\[Phi]2$$, $CellContext`\[Phi]2$3615180$$, 0], 
-        Hold[$CellContext`\[Theta]3$$, $CellContext`\[Theta]3$3615181$$, 0], 
-        Hold[$CellContext`\[Phi]3$$, $CellContext`\[Phi]3$3615182$$, 0], 
-        Hold[$CellContext`n1$$, $CellContext`n1$3615183$$, 0], 
-        Hold[$CellContext`n2$$, $CellContext`n2$3615184$$, 0]}, 
+        Hold[$CellContext`\[Theta]0$$, $CellContext`\[Theta]0$4234782$$, 0], 
+        Hold[$CellContext`\[Phi]0$$, $CellContext`\[Phi]0$4234783$$, 0], 
+        Hold[$CellContext`\[Theta]1$$, $CellContext`\[Theta]1$4234784$$, 0], 
+        Hold[$CellContext`\[Phi]1$$, $CellContext`\[Phi]1$4234785$$, 0], 
+        Hold[$CellContext`\[Theta]2$$, $CellContext`\[Theta]2$4234786$$, 0], 
+        Hold[$CellContext`\[Phi]2$$, $CellContext`\[Phi]2$4234787$$, 0], 
+        Hold[$CellContext`\[Theta]3$$, $CellContext`\[Theta]3$4234788$$, 0], 
+        Hold[$CellContext`\[Phi]3$$, $CellContext`\[Phi]3$4234789$$, 0], 
+        Hold[$CellContext`n1$$, $CellContext`n1$4234790$$, 0], 
+        Hold[$CellContext`n2$$, $CellContext`n2$4234791$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -1089,7 +1089,7 @@ $CellContext`u3 + $CellContext`\[Mu] $CellContext`v3, \
    3.701638652108066*^9, {3.701638791440692*^9, 3.701638802881538*^9}, 
    3.7016393347303667`*^9, 3.701639365117861*^9, 3.701639881813568*^9, 
    3.701640970416144*^9, {3.7016410808631907`*^9, 3.701641092644849*^9}, 
-   3.701642359575242*^9}]
+   3.701642359575242*^9, 3.701647320055799*^9, 3.70165385514118*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1106,13 +1106,14 @@ Cell[BoxData[
  TagBox[
   RowBox[{"(", "\[NoBreak]", GridBox[{
      {
-      RowBox[{"-", "0.2534089709300281`"}], "0.007113165584144411`", 
-      RowBox[{"-", "0.02128199779747375`"}]},
-     {"0.9301132111271371`", 
-      RowBox[{"-", "0.25340897093002823`"}], "0.06747415258023812`"},
-     {"0.06747415258023813`", 
-      RowBox[{"-", "0.021281997797473765`"}], 
-      RowBox[{"-", "0.02053649371206602`"}]}
+      RowBox[{"-", "0.943026061173501`"}], 
+      RowBox[{"-", "8.137554727128168`*^-6"}], "0.07123685673797572`"},
+     {"0.3039156163805714`", 
+      RowBox[{"-", "0.00002489081354906809`"}], 
+      RowBox[{"-", "0.0229602867677959`"}]},
+     {"0.11253007791959793`", 
+      RowBox[{"-", "9.705401082994425`*^-7"}], 
+      RowBox[{"-", "0.008500771104096359`"}]}
     },
     GridBoxAlignment->{
      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
@@ -1129,17 +1130,8 @@ Cell[BoxData[
  CellChangeTimes->{{3.70163532608387*^9, 3.701635344651676*^9}, 
    3.701635408275804*^9, 3.701635863817409*^9, {3.701635991594788*^9, 
    3.701636006969162*^9}, {3.701636042147214*^9, 3.701636131852413*^9}, 
-   3.70163626150373*^9, {3.701641255808361*^9, 3.70164128639644*^9}}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"Norm", "[", "ki", "]"}]], "Input",
- CellChangeTimes->{{3.701637197946327*^9, 3.701637221027122*^9}}],
-
-Cell[BoxData["1.9567860553714413`"], "Output",
- CellChangeTimes->{{3.70163720626128*^9, 3.701637221628131*^9}}]
+   3.70163626150373*^9, {3.701641255808361*^9, 3.70164128639644*^9}, 
+   3.7016474125849743`*^9}]
 }, Open  ]]
 },
 WindowSize->{943, 1028},
@@ -1160,15 +1152,11 @@ CellTagsIndex->{}
 Notebook[{
 Cell[CellGroupData[{
 Cell[580, 22, 38035, 867, 2828, "Input"],
-Cell[38618, 891, 11652, 200, 492, "Output"]
+Cell[38618, 891, 11694, 200, 492, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[50307, 1096, 327, 6, 32, "Input"],
-Cell[50637, 1104, 1177, 27, 80, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[51851, 1136, 124, 2, 32, "Input"],
-Cell[51978, 1140, 111, 1, 32, "Output"]
+Cell[50349, 1096, 327, 6, 32, "Input"],
+Cell[50679, 1104, 1231, 29, 88, "Output"]
 }, Open  ]]
 }
 ]
