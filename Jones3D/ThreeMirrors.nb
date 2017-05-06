@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     52359,       1156]
-NotebookOptionsPosition[     51926,       1136]
-NotebookOutlinePosition[     52264,       1151]
-CellTagsIndexPosition[     52221,       1148]
+NotebookDataLength[     55659,       1215]
+NotebookOptionsPosition[     55341,       1199]
+NotebookOutlinePosition[     55680,       1214]
+CellTagsIndexPosition[     55637,       1211]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -90,8 +90,8 @@ Cell[BoxData[{
       RowBox[{
       "s0", ",", "p0", ",", "s1", ",", "p1", ",", "k1", ",", "s2", ",", "p2", 
        ",", "k2", ",", "Q0", ",", "Q1", ",", "Q2", ",", "ci", ",", "ct", ",", 
-       "rp", ",", "tp", ",", "rs", ",", "ts", ",", "P1", ",", "P2", ",", 
-       "Rays"}], "}"}], ",", "\[IndentingNewLine]", 
+       "r", ",", "rp", ",", "tp", ",", "rs", ",", "t", ",", "ts", ",", "P1", 
+       ",", "P2", ",", "Rays"}], "}"}], ",", "\[IndentingNewLine]", 
      RowBox[{"If", "[", 
       RowBox[{
        RowBox[{
@@ -129,7 +129,7 @@ Cell[BoxData[{
            RowBox[{"(", 
             RowBox[{"1", "-", "r"}], ")"}], 
            RowBox[{"Outer", "[", 
-            RowBox[{"Times", ",", "k0", ",", "k0"}], "]"}]}]}]}], ";", 
+            RowBox[{"Times", ",", "u", ",", "u"}], "]"}]}]}]}], ";", 
         "\[IndentingNewLine]", 
         RowBox[{"P2", "=", 
          RowBox[{
@@ -139,7 +139,7 @@ Cell[BoxData[{
            RowBox[{"(", 
             RowBox[{"1", "-", "t"}], ")"}], 
            RowBox[{"Outer", "[", 
-            RowBox[{"Times", ",", "k0", ",", "k0"}], "]"}]}]}]}], ";", 
+            RowBox[{"Times", ",", "u", ",", "u"}], "]"}]}]}]}], ";", 
         "\[IndentingNewLine]", 
         RowBox[{"Rays", "=", 
          RowBox[{"Transpose", "[", 
@@ -350,11 +350,6 @@ Cell[BoxData[{
      RowBox[{
       RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
       RowBox[{
-       RowBox[{"k0", "=", 
-        RowBox[{"{", 
-         RowBox[{"SphericalUnit", "[", 
-          RowBox[{"\[Theta]0", ",", "\[Phi]0"}], "]"}], "}"}]}], ";", 
-       "\[IndentingNewLine]", 
        RowBox[{"M1", "=", 
         RowBox[{"SphericalBase", "[", 
          RowBox[{"\[Theta]1", ",", "\[Phi]1", ",", "0"}], "]"}]}], ";", 
@@ -385,11 +380,6 @@ Cell[BoxData[{
           RowBox[{"{", 
            RowBox[{"M1", ",", "M2", ",", "M3"}], "}"}]}], "]"}]}], ";", 
        "\[IndentingNewLine]", "\[IndentingNewLine]", 
-       RowBox[{"p0", "=", 
-        RowBox[{"{", 
-         RowBox[{"{", 
-          RowBox[{"1", ",", "1", ",", "0"}], "}"}], "}"}]}], ";", 
-       "\[IndentingNewLine]", 
        RowBox[{"r1", "=", 
         RowBox[{"{", 
          RowBox[{
@@ -424,22 +414,79 @@ Cell[BoxData[{
          "n0", ",", "n0", ",", "n0", ",", "n0", ",", "n0", ",", "n0", ",", 
           "n1", ",", "n2", ",", "n3"}], "}"}]}], ";", "\[IndentingNewLine]", 
        "\[IndentingNewLine]", 
+       RowBox[{"x0", "=", 
+        RowBox[{"Flatten", "[", 
+         RowBox[{
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"1", ",", "1", ",", "0"}], "}"}], "+", 
+             RowBox[{
+              RowBox[{"SphericalBase", "[", 
+               RowBox[{"\[Theta]0", ",", "\[Phi]0", ",", "0"}], "]"}], ".", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"#1", "*", 
+                    RowBox[{"Cos", "[", "#2", "]"}]}], ",", 
+                   RowBox[{"#1", "*", 
+                    RowBox[{"Sin", "[", "#2", "]"}]}], ",", "0"}], "}"}], 
+                 "&"}], "@@", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"Rbundle", "*", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"i", "+", 
+                    RowBox[{"Boole", "[", 
+                    RowBox[{"nrays1", ">", "1"}], "]"}]}], ")"}], "/", 
+                    RowBox[{"(", "nrays1", ")"}]}]}], ",", 
+                  RowBox[{"2", "\[Pi]", "*", 
+                   RowBox[{"j", "/", 
+                    RowBox[{"(", "nrays2", ")"}]}]}]}], "}"}]}], ")"}]}]}], 
+            ",", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", "0", ",", 
+              RowBox[{"nrays1", "-", "1"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"j", ",", "0", ",", 
+              RowBox[{"nrays2", "-", "1"}]}], "}"}]}], "]"}], ",", "1"}], 
+         "]"}]}], ";", "\[IndentingNewLine]", 
        RowBox[{"path", "=", 
-        RowBox[{"{", "p0", "}"}]}], ";", "\[IndentingNewLine]", 
-       RowBox[{"P", "=", 
-        RowBox[{"{", 
-         RowBox[{"IdentityMatrix", "[", "3", "]"}], "}"}]}], ";", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", "#", "}"}], "&"}], "/@", "x0"}]}], ";", 
        "\[IndentingNewLine]", 
+       RowBox[{"k0", "=", 
+        RowBox[{"ConstantArray", "[", 
+         RowBox[{
+          RowBox[{"SphericalUnit", "[", 
+           RowBox[{"\[Theta]0", ",", "\[Phi]0"}], "]"}], ",", 
+          RowBox[{"Length", "[", "x0", "]"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"P", "=", 
+        RowBox[{"ConstantArray", "[", 
+         RowBox[{
+          RowBox[{"IdentityMatrix", "[", "3", "]"}], ",", 
+          RowBox[{"Length", "[", "x0", "]"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
        RowBox[{"m", "=", "1"}], ";", "\[IndentingNewLine]", 
        RowBox[{"While", "[", 
         RowBox[{
-         RowBox[{"m", "\[LessEqual]", "4"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"m", "\[LessEqual]", 
+          RowBox[{"Min", "[", 
+           RowBox[{"1000", ",", 
+            RowBox[{"Length", "[", "x0", "]"}]}], "]"}]}], ",", 
+         "\[IndentingNewLine]", 
          RowBox[{
           RowBox[{"ki", "=", 
            RowBox[{"k0", "[", 
             RowBox[{"[", "m", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
-          RowBox[{"pi", "=", 
-           RowBox[{"p0", "[", 
+          RowBox[{"xi", "=", 
+           RowBox[{"x0", "[", 
             RowBox[{"[", "m", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
           "\[IndentingNewLine]", 
           RowBox[{"j", "=", "7"}], ";", "\[IndentingNewLine]", 
@@ -464,7 +511,7 @@ Cell[BoxData[{
                    RowBox[{
                     RowBox[{
                     RowBox[{"(", 
-                    RowBox[{"#2", "-", "pi"}], ")"}], ".", "#1"}], "/", 
+                    RowBox[{"#2", "-", "xi"}], ")"}], ".", "#1"}], "/", 
                     RowBox[{"(", 
                     RowBox[{"ki", ".", "#1"}], ")"}]}]}], "]"}], "&"}], ",", 
                 RowBox[{"{", 
@@ -479,7 +526,7 @@ Cell[BoxData[{
                 RowBox[{
                  RowBox[{
                   RowBox[{"(", 
-                   RowBox[{"pi", "+", 
+                   RowBox[{"xi", "+", 
                     RowBox[{"#", "*", "ki"}]}], ")"}], "&"}], ",", "L"}], 
                 "]"}], "-", "centers"}]}], ";", "\[IndentingNewLine]", 
              RowBox[{"q", "=", 
@@ -523,8 +570,8 @@ Cell[BoxData[{
                  RowBox[{"Part", "[", 
                   RowBox[{"j", ",", "1", ",", "1"}], "]"}]}], ";", 
                 "\[IndentingNewLine]", 
-                RowBox[{"pi", "=", 
-                 RowBox[{"pi", "+", 
+                RowBox[{"xi", "=", 
+                 RowBox[{"xi", "+", 
                   RowBox[{
                    RowBox[{"L", "[", 
                     RowBox[{"[", "j", "]"}], "]"}], "*", "ki"}]}]}], ";", 
@@ -535,7 +582,7 @@ Cell[BoxData[{
                  RowBox[{"Append", "[", 
                   RowBox[{
                    RowBox[{"path", "[", 
-                    RowBox[{"[", "m", "]"}], "]"}], ",", "pi"}], "]"}]}], ";",
+                    RowBox[{"[", "m", "]"}], "]"}], ",", "xi"}], "]"}]}], ";",
                  "\[IndentingNewLine]", 
                 RowBox[{"If", "[", 
                  RowBox[{
@@ -543,7 +590,7 @@ Cell[BoxData[{
                   RowBox[{
                    RowBox[{
                     RowBox[{"{", 
-                    RowBox[{"Rays", ",", "PR", ",", "PT"}], "}"}], "=", 
+                    RowBox[{"Rays", ",", "P1", ",", "P2"}], "}"}], "=", 
                     RowBox[{"ReflectRefract", "[", 
                     RowBox[{
                     RowBox[{"S", "[", 
@@ -556,7 +603,7 @@ Cell[BoxData[{
                    RowBox[{
                     RowBox[{"P", "[", 
                     RowBox[{"[", "m", "]"}], "]"}], "=", 
-                    RowBox[{"PR", ".", 
+                    RowBox[{"P1", ".", 
                     RowBox[{"P", "[", 
                     RowBox[{"[", "m", "]"}], "]"}]}]}], ";", 
                    "\[IndentingNewLine]", 
@@ -567,7 +614,7 @@ Cell[BoxData[{
                    "\[IndentingNewLine]", 
                    RowBox[{"P", "=", 
                     RowBox[{"Append", "[", 
-                    RowBox[{"P", ",", "PT"}], "]"}]}], ";", 
+                    RowBox[{"P", ",", "P2"}], "]"}]}], ";", 
                    "\[IndentingNewLine]", 
                    RowBox[{"k0", "=", 
                     RowBox[{"Append", "[", 
@@ -576,14 +623,14 @@ Cell[BoxData[{
                     RowBox[{"[", 
                     RowBox[{";;", ",", "3"}], "]"}], "]"}]}], "]"}]}], ";", 
                    "\[IndentingNewLine]", 
-                   RowBox[{"p0", "=", 
+                   RowBox[{"x0", "=", 
                     RowBox[{"Append", "[", 
-                    RowBox[{"p0", ",", "pi"}], "]"}]}], ";", 
+                    RowBox[{"x0", ",", "xi"}], "]"}]}], ";", 
                    "\[IndentingNewLine]", 
                    RowBox[{"path", "=", 
                     RowBox[{"Append", "[", 
                     RowBox[{"path", ",", 
-                    RowBox[{"{", "pi", "}"}]}], "]"}]}], ";"}]}], 
+                    RowBox[{"{", "xi", "}"}]}], "]"}]}], ";"}]}], 
                  "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]",
                "]"}], ";", "\[IndentingNewLine]", 
              RowBox[{"its", "=", 
@@ -698,6 +745,21 @@ Cell[BoxData[{
            RowBox[{"\"\<x\>\"", ",", "\"\<y\>\"", ",", "\"\<z\>\""}], 
            "}"}]}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}], ",", 
    "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"nrays1", ",", "1"}], "}"}], ",", "1", ",", "10", ",", "1"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"nrays2", ",", "1"}], "}"}], ",", "1", ",", "10", ",", "1"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Rbundle", ",", "0.1"}], "}"}], ",", "0.1", ",", "1"}], "}"}], 
+   ",", "\[IndentingNewLine]", 
    RowBox[{"{", 
     RowBox[{
      RowBox[{"{", 
@@ -887,14 +949,28 @@ Cell[BoxData[{
    3.7016386513733673`*^9}, 3.701638707587962*^9, {3.701638761757633*^9, 
    3.701638800638187*^9}, {3.701639331723557*^9, 3.701639356521208*^9}, 
    3.70164099049853*^9, {3.701641080395234*^9, 3.7016410919018993`*^9}, {
-   3.7016423554939737`*^9, 3.7016423559954157`*^9}}],
+   3.7016423554939737`*^9, 3.7016423559954157`*^9}, {3.7030246721365957`*^9, 
+   3.703024763402748*^9}, {3.703024805653809*^9, 3.703024985586863*^9}, {
+   3.703025019161644*^9, 3.7030251899298353`*^9}, {3.703025223019319*^9, 
+   3.7030252244050827`*^9}, {3.703025691235117*^9, 3.703025693259348*^9}, 
+   3.703025764801528*^9, {3.703025874840461*^9, 3.703025904895837*^9}, {
+   3.70302612680272*^9, 3.703026150601853*^9}, {3.703026190155209*^9, 
+   3.7030261974665403`*^9}, {3.703026272327881*^9, 3.703026434779841*^9}, {
+   3.703026560427484*^9, 3.703026583880857*^9}, {3.703026687606843*^9, 
+   3.703026731643218*^9}, {3.703026784150725*^9, 3.70302680018918*^9}, 
+   3.703026971087738*^9, {3.703027026131425*^9, 3.703027063955084*^9}, {
+   3.703027209395842*^9, 3.703027240552249*^9}, {3.703027426938039*^9, 
+   3.703027501956758*^9}, {3.7030277789804277`*^9, 3.703027809487584*^9}, {
+   3.703028137056849*^9, 3.703028139487507*^9}}],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
    DynamicModuleBox[{$CellContext`n1$$ = 1.5, $CellContext`n2$$ = 
-    1.5, $CellContext`n3$$ = 1.5, $CellContext`\[Theta]0$$ = Rational[1, 2] 
-    Pi, $CellContext`\[Theta]1$$ = Rational[1, 2] 
+    1.5, $CellContext`n3$$ = 1.5, $CellContext`nrays1$$ = 
+    2, $CellContext`nrays2$$ = 4, $CellContext`Rbundle$$ = 
+    0.1, $CellContext`\[Theta]0$$ = 
+    1.6210618092523332`, $CellContext`\[Theta]1$$ = Rational[1, 2] 
     Pi, $CellContext`\[Theta]2$$ = Rational[1, 2] 
     Pi, $CellContext`\[Theta]3$$ = Rational[1, 2] Pi, $CellContext`\[Phi]0$$ =
      Pi, $CellContext`\[Phi]1$$ = Rational[7, 4] Pi, $CellContext`\[Phi]2$$ = 
@@ -902,6 +978,9 @@ Cell[BoxData[
     Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
     Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
     1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`nrays1$$], 1}, 1, 10, 1}, {{
+       Hold[$CellContext`nrays2$$], 1}, 1, 10, 1}, {{
+       Hold[$CellContext`Rbundle$$], 0.1}, 0.1, 1}, {{
        Hold[$CellContext`\[Theta]0$$], Rational[1, 2] Pi}, 0, Pi}, {{
        Hold[$CellContext`\[Phi]0$$], Pi}, 0, 2 Pi}, {{
        Hold[$CellContext`\[Theta]1$$], Rational[1, 2] Pi}, 0, Pi}, {{
@@ -914,16 +993,18 @@ Cell[BoxData[
        Hold[$CellContext`n2$$], 1.5}, 0, 2}, {{
        Hold[$CellContext`n3$$], 1.5}, 0, 2}}, Typeset`size$$ = {
     360., {204., 209.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = True, $CellContext`\[Theta]0$4234782$$ = 
-    0, $CellContext`\[Phi]0$4234783$$ = 0, $CellContext`\[Theta]1$4234784$$ = 
-    0, $CellContext`\[Phi]1$4234785$$ = 0, $CellContext`\[Theta]2$4234786$$ = 
-    0, $CellContext`\[Phi]2$4234787$$ = 0, $CellContext`\[Theta]3$4234788$$ = 
-    0, $CellContext`\[Phi]3$4234789$$ = 0, $CellContext`n1$4234790$$ = 
-    0, $CellContext`n2$4234791$$ = 0}, 
+    Typeset`skipInitDone$$ = True, $CellContext`nrays1$1917283$$ = 
+    0, $CellContext`nrays2$1917284$$ = 0, $CellContext`Rbundle$1917285$$ = 
+    0, $CellContext`\[Theta]0$1917286$$ = 0, $CellContext`\[Phi]0$1917287$$ = 
+    0, $CellContext`\[Theta]1$1917288$$ = 0, $CellContext`\[Phi]1$1917289$$ = 
+    0, $CellContext`\[Theta]2$1917290$$ = 0, $CellContext`\[Phi]2$1917291$$ = 
+    0, $CellContext`\[Theta]3$1917292$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, 
       "Variables" :> {$CellContext`n1$$ = 1.5, $CellContext`n2$$ = 
-        1.5, $CellContext`n3$$ = 1.5, $CellContext`\[Theta]0$$ = 
+        1.5, $CellContext`n3$$ = 1.5, $CellContext`nrays1$$ = 
+        1, $CellContext`nrays2$$ = 1, $CellContext`Rbundle$$ = 
+        0.1, $CellContext`\[Theta]0$$ = 
         Rational[1, 2] Pi, $CellContext`\[Theta]1$$ = 
         Rational[1, 2] Pi, $CellContext`\[Theta]2$$ = 
         Rational[1, 2] Pi, $CellContext`\[Theta]3$$ = 
@@ -932,25 +1013,23 @@ Cell[BoxData[
         Rational[7, 4] Pi, $CellContext`\[Phi]2$$ = 
         Rational[1, 4] Pi, $CellContext`\[Phi]3$$ = Rational[3, 4] Pi}, 
       "ControllerVariables" :> {
-        Hold[$CellContext`\[Theta]0$$, $CellContext`\[Theta]0$4234782$$, 0], 
-        Hold[$CellContext`\[Phi]0$$, $CellContext`\[Phi]0$4234783$$, 0], 
-        Hold[$CellContext`\[Theta]1$$, $CellContext`\[Theta]1$4234784$$, 0], 
-        Hold[$CellContext`\[Phi]1$$, $CellContext`\[Phi]1$4234785$$, 0], 
-        Hold[$CellContext`\[Theta]2$$, $CellContext`\[Theta]2$4234786$$, 0], 
-        Hold[$CellContext`\[Phi]2$$, $CellContext`\[Phi]2$4234787$$, 0], 
-        Hold[$CellContext`\[Theta]3$$, $CellContext`\[Theta]3$4234788$$, 0], 
-        Hold[$CellContext`\[Phi]3$$, $CellContext`\[Phi]3$4234789$$, 0], 
-        Hold[$CellContext`n1$$, $CellContext`n1$4234790$$, 0], 
-        Hold[$CellContext`n2$$, $CellContext`n2$4234791$$, 0]}, 
+        Hold[$CellContext`nrays1$$, $CellContext`nrays1$1917283$$, 0], 
+        Hold[$CellContext`nrays2$$, $CellContext`nrays2$1917284$$, 0], 
+        Hold[$CellContext`Rbundle$$, $CellContext`Rbundle$1917285$$, 0], 
+        Hold[$CellContext`\[Theta]0$$, $CellContext`\[Theta]0$1917286$$, 0], 
+        Hold[$CellContext`\[Phi]0$$, $CellContext`\[Phi]0$1917287$$, 0], 
+        Hold[$CellContext`\[Theta]1$$, $CellContext`\[Theta]1$1917288$$, 0], 
+        Hold[$CellContext`\[Phi]1$$, $CellContext`\[Phi]1$1917289$$, 0], 
+        Hold[$CellContext`\[Theta]2$$, $CellContext`\[Theta]2$1917290$$, 0], 
+        Hold[$CellContext`\[Phi]2$$, $CellContext`\[Phi]2$1917291$$, 0], 
+        Hold[$CellContext`\[Theta]3$$, $CellContext`\[Theta]3$1917292$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
         Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
          Typeset`skipInitDone$$}, "Body" :> Quiet[
-        Module[{}, $CellContext`k0 = {
-            $CellContext`SphericalUnit[$CellContext`\[Theta]0$$, \
-$CellContext`\[Phi]0$$]}; $CellContext`M1 = \
-$CellContext`SphericalBase[$CellContext`\[Theta]1$$, $CellContext`\[Phi]1$$, 
+        Module[{}, $CellContext`M1 = $CellContext`SphericalBase[$CellContext`\
+\[Theta]1$$, $CellContext`\[Phi]1$$, 
             0]; $CellContext`M2 = $CellContext`SphericalBase[$CellContext`\
 \[Theta]2$$, $CellContext`\[Phi]2$$, 
             0]; $CellContext`M3 = $CellContext`SphericalBase[$CellContext`\
@@ -961,8 +1040,8 @@ $CellContext`w2} =
           Transpose[$CellContext`M2]; {$CellContext`u3, $CellContext`v3, \
 $CellContext`w3} = Transpose[$CellContext`M3]; $CellContext`S = 
           Join[$CellContext`B, {$CellContext`M1, $CellContext`M2, \
-$CellContext`M3}]; $CellContext`p0 = {{1, 1, 0}}; $CellContext`r1 = {-1, 1, 
-           0}; $CellContext`r2 = {-1, -1, 0}; $CellContext`r3 = {1, -1, 
+$CellContext`M3}]; $CellContext`r1 = {-1, 1, 0}; $CellContext`r2 = {-1, -1, 
+           0}; $CellContext`r3 = {1, -1, 
            0}; {$CellContext`b1, $CellContext`b2, $CellContext`b3} = 
           2 IdentityMatrix[
             3]; $CellContext`centers = {-$CellContext`b3, -$CellContext`b2, \
@@ -970,23 +1049,38 @@ $CellContext`M3}]; $CellContext`p0 = {{1, 1, 0}}; $CellContext`r1 = {-1, 1,
 $CellContext`r1, $CellContext`r2, $CellContext`r3}; $CellContext`n0 = 
           2; $CellContext`refidx = {$CellContext`n0, $CellContext`n0, \
 $CellContext`n0, $CellContext`n0, $CellContext`n0, $CellContext`n0, \
-$CellContext`n1$$, $CellContext`n2$$, $CellContext`n3$$}; $CellContext`path = \
-{$CellContext`p0}; $CellContext`P = {
-            IdentityMatrix[3]}; $CellContext`m = 1; 
-         While[$CellContext`m <= 
-           4, $CellContext`ki = 
-            Part[$CellContext`k0, $CellContext`m]; $CellContext`pi = 
-            Part[$CellContext`p0, $CellContext`m]; $CellContext`j = 
+$CellContext`n1$$, $CellContext`n2$$, $CellContext`n3$$}; $CellContext`x0 = 
+          Flatten[
+            Table[{1, 1, 0} + Dot[
+               $CellContext`SphericalBase[$CellContext`\[Theta]0$$, \
+$CellContext`\[Phi]0$$, 0], 
+               
+               Apply[{# Cos[#2], # Sin[#2], 
+                 0}& , {$CellContext`Rbundle$$ (($CellContext`i + 
+                   Boole[$CellContext`nrays1$$ > 1])/$CellContext`nrays1$$), 
+                 2 Pi ($CellContext`j/$CellContext`nrays2$$)}]], \
+{$CellContext`i, 0, $CellContext`nrays1$$ - 1}, {$CellContext`j, 
+              0, $CellContext`nrays2$$ - 1}], 1]; $CellContext`path = 
+          Map[{#}& , $CellContext`x0]; $CellContext`k0 = ConstantArray[
+            $CellContext`SphericalUnit[$CellContext`\[Theta]0$$, \
+$CellContext`\[Phi]0$$], 
+            Length[$CellContext`x0]]; $CellContext`P = ConstantArray[
+            IdentityMatrix[3], 
+            Length[$CellContext`x0]]; $CellContext`m = 1; 
+         While[$CellContext`m <= Min[1000, 
+             Length[$CellContext`x0]], $CellContext`ki = 
+            Part[$CellContext`k0, $CellContext`m]; $CellContext`xi = 
+            Part[$CellContext`x0, $CellContext`m]; $CellContext`j = 
             7; $CellContext`its = 0; While[
              
              And[$CellContext`its < 100, $CellContext`j > 6], $CellContext`L = 
               MapThread[
                If[Dot[$CellContext`ki, #] == 0, -100000, 
-                 Dot[#2 - $CellContext`pi, #]/Dot[$CellContext`ki, #]]& , {
+                 Dot[#2 - $CellContext`xi, #]/Dot[$CellContext`ki, #]]& , {
                  Part[$CellContext`S, 
                   Span[1, All], 
                   Span[1, All], 3], $CellContext`centers}]; $CellContext`d = 
-              Map[$CellContext`pi + # $CellContext`ki& , $CellContext`L] - \
+              Map[$CellContext`xi + # $CellContext`ki& , $CellContext`L] - \
 $CellContext`centers; $CellContext`q = MapThread[Norm[
                   Dot[
                    Inverse[#], #2], Infinity] < 
@@ -997,26 +1091,26 @@ $CellContext`centers; $CellContext`q = MapThread[Norm[
                  Select[$CellContext`LL, # > $CellContext`EPS& ]]]; 
              If[Length[$CellContext`j] == 0, $CellContext`its = 100; 
                Null, $CellContext`j = 
-                Part[$CellContext`j, 1, 1]; $CellContext`pi = $CellContext`pi + 
+                Part[$CellContext`j, 1, 1]; $CellContext`xi = $CellContext`xi + 
                  Part[$CellContext`L, $CellContext`j] $CellContext`ki; 
                Part[$CellContext`path, $CellContext`m] = Append[
-                  Part[$CellContext`path, $CellContext`m], $CellContext`pi]; 
+                  Part[$CellContext`path, $CellContext`m], $CellContext`xi]; 
                If[$CellContext`j > 
-                 6, {$CellContext`Rays, $CellContext`PR, $CellContext`PT} = \
+                 6, {$CellContext`Rays, $CellContext`P1, $CellContext`P2} = \
 $CellContext`ReflectRefract[
                     Part[$CellContext`S, $CellContext`j, 
                     Span[1, All], 3], $CellContext`ki, 
                     Part[$CellContext`refidx, $CellContext`j]]; 
-                 Part[$CellContext`P, $CellContext`m] = Dot[$CellContext`PR, 
+                 Part[$CellContext`P, $CellContext`m] = Dot[$CellContext`P1, 
                     Part[$CellContext`P, $CellContext`m]]; $CellContext`ki = 
                   Part[$CellContext`Rays, 
                     Span[1, All], 2]; $CellContext`P = 
-                  Append[$CellContext`P, $CellContext`PT]; $CellContext`k0 = 
+                  Append[$CellContext`P, $CellContext`P2]; $CellContext`k0 = 
                   Append[$CellContext`k0, 
                     Part[$CellContext`Rays, 
-                    Span[1, All], 3]]; $CellContext`p0 = 
-                  Append[$CellContext`p0, $CellContext`pi]; $CellContext`path = 
-                  Append[$CellContext`path, {$CellContext`pi}]; Null]; 
+                    Span[1, All], 3]]; $CellContext`x0 = 
+                  Append[$CellContext`x0, $CellContext`xi]; $CellContext`path = 
+                  Append[$CellContext`path, {$CellContext`xi}]; Null]; 
                Null]; $CellContext`its = $CellContext`its + 1; 
              Null]; $CellContext`m = $CellContext`m + 1; Null]; Show[
            Join[
@@ -1050,7 +1144,10 @@ $CellContext`u3 + $CellContext`\[Mu] $CellContext`v3, \
               PlotStyle -> Directive[Blue, 
                 Opacity[0.5]]]}], PlotRange -> {{-2, 2}, {-2, 2}, {-2, 2}}, 
            Axes -> True, AxesLabel -> {"x", "y", "z"}]]], 
-      "Specifications" :> {{{$CellContext`\[Theta]0$$, Rational[1, 2] Pi}, 0, 
+      "Specifications" :> {{{$CellContext`nrays1$$, 1}, 1, 10, 
+         1}, {{$CellContext`nrays2$$, 1}, 1, 10, 
+         1}, {{$CellContext`Rbundle$$, 0.1}, 0.1, 
+         1}, {{$CellContext`\[Theta]0$$, Rational[1, 2] Pi}, 0, 
          Pi}, {{$CellContext`\[Phi]0$$, Pi}, 0, 2 
          Pi}, {{$CellContext`\[Theta]1$$, Rational[1, 2] Pi}, 0, 
          Pi}, {{$CellContext`\[Phi]1$$, Rational[7, 4] Pi}, 0, 2 
@@ -1061,7 +1158,7 @@ $CellContext`u3 + $CellContext`\[Mu] $CellContext`v3, \
          Pi}, {{$CellContext`n1$$, 1.5}, 0, 2}, {{$CellContext`n2$$, 1.5}, 0, 
          2}, {{$CellContext`n3$$, 1.5}, 0, 2}}, "Options" :> {}, 
       "DefaultOptions" :> {}],
-     ImageSizeCache->{641., {234., 241.}},
+     ImageSizeCache->{668., {234., 241.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -1089,53 +1186,19 @@ $CellContext`u3 + $CellContext`\[Mu] $CellContext`v3, \
    3.701638652108066*^9, {3.701638791440692*^9, 3.701638802881538*^9}, 
    3.7016393347303667`*^9, 3.701639365117861*^9, 3.701639881813568*^9, 
    3.701640970416144*^9, {3.7016410808631907`*^9, 3.701641092644849*^9}, 
-   3.701642359575242*^9, 3.701647320055799*^9, 3.70165385514118*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"MatrixForm", "[", 
-  RowBox[{"P", "[", 
-   RowBox[{"[", "1", "]"}], "]"}], "]"}]], "Input",
- CellChangeTimes->{{3.701635324935471*^9, 3.701635343602107*^9}, {
-  3.701635407751308*^9, 3.701635407887321*^9}, {3.7016359869281693`*^9, 
-  3.701636006629952*^9}, {3.701636044285027*^9, 3.701636069471537*^9}}],
-
-Cell[BoxData[
- TagBox[
-  RowBox[{"(", "\[NoBreak]", GridBox[{
-     {
-      RowBox[{"-", "0.943026061173501`"}], 
-      RowBox[{"-", "8.137554727128168`*^-6"}], "0.07123685673797572`"},
-     {"0.3039156163805714`", 
-      RowBox[{"-", "0.00002489081354906809`"}], 
-      RowBox[{"-", "0.0229602867677959`"}]},
-     {"0.11253007791959793`", 
-      RowBox[{"-", "9.705401082994425`*^-7"}], 
-      RowBox[{"-", "0.008500771104096359`"}]}
-    },
-    GridBoxAlignment->{
-     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
-      "RowsIndexed" -> {}},
-    GridBoxSpacings->{"Columns" -> {
-        Offset[0.27999999999999997`], {
-         Offset[0.7]}, 
-        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-        Offset[0.2], {
-         Offset[0.4]}, 
-        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
-  Function[BoxForm`e$, 
-   MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{{3.70163532608387*^9, 3.701635344651676*^9}, 
-   3.701635408275804*^9, 3.701635863817409*^9, {3.701635991594788*^9, 
-   3.701636006969162*^9}, {3.701636042147214*^9, 3.701636131852413*^9}, 
-   3.70163626150373*^9, {3.701641255808361*^9, 3.70164128639644*^9}, 
-   3.7016474125849743`*^9}]
+   3.701642359575242*^9, 3.701647320055799*^9, 3.70165385514118*^9, 
+   3.7030249882400827`*^9, {3.703025171242509*^9, 3.703025190527693*^9}, 
+   3.703025225143133*^9, 3.703025693832465*^9, 3.7030257654205627`*^9, {
+   3.7030258996289988`*^9, 3.703025905487091*^9}, 3.703026158958531*^9, {
+   3.703026364412924*^9, 3.703026435824375*^9}, {3.7030265643611927`*^9, 
+   3.7030265856585617`*^9}, {3.703026742019256*^9, 3.703026760212987*^9}, 
+   3.703026808932838*^9, 3.7030270662030697`*^9, {3.703027220482648*^9, 
+   3.703027241351575*^9}, 3.703027350792173*^9, 3.703027515784233*^9, 
+   3.7030278109398537`*^9, 3.703028146335968*^9, 3.703028403483733*^9}]
 }, Open  ]]
 },
-WindowSize->{943, 1028},
-WindowMargins->{{0, Automatic}, {0, Automatic}},
+WindowSize->{1855, 1056},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
 FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
 StyleDefinitions->"Default.nb"
 ]
@@ -1151,12 +1214,8 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 38035, 867, 2828, "Input"],
-Cell[38618, 891, 11694, 200, 492, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[50349, 1096, 327, 6, 32, "Input"],
-Cell[50679, 1104, 1231, 29, 88, "Output"]
+Cell[580, 22, 41240, 941, 2689, "Input"],
+Cell[41823, 965, 13502, 231, 492, "Output"]
 }, Open  ]]
 }
 ]
